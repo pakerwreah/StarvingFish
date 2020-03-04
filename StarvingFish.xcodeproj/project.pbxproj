@@ -1,0 +1,302 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		34B5567E1D03A13F0054E8F8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 34B5567D1D03A13F0054E8F8 /* main.m */; };
+		34B556811D03A13F0054E8F8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 34B556801D03A13F0054E8F8 /* AppDelegate.m */; };
+		34B556841D03A13F0054E8F8 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 34B556831D03A13F0054E8F8 /* GameScene.m */; };
+		34B556891D03A13F0054E8F8 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34B556881D03A13F0054E8F8 /* GameViewController.m */; };
+		34B5568E1D03A13F0054E8F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34B5568D1D03A13F0054E8F8 /* Assets.xcassets */; };
+		34B556991D03A2D40054E8F8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34B556981D03A2D40054E8F8 /* LaunchScreen.xib */; };
+		34B5569B1D03A3230054E8F8 /* GameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34B5569A1D03A3230054E8F8 /* GameViewController.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		34B556791D03A13F0054E8F8 /* StarvingFish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StarvingFish.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		34B5567D1D03A13F0054E8F8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		34B5567F1D03A13F0054E8F8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		34B556801D03A13F0054E8F8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		34B556821D03A13F0054E8F8 /* GameScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
+		34B556831D03A13F0054E8F8 /* GameScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameScene.m; sourceTree = "<group>"; };
+		34B556871D03A13F0054E8F8 /* GameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
+		34B556881D03A13F0054E8F8 /* GameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
+		34B5568D1D03A13F0054E8F8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		34B556921D03A13F0054E8F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		34B556981D03A2D40054E8F8 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
+		34B5569A1D03A3230054E8F8 /* GameViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GameViewController.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		34B556761D03A13F0054E8F8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		34B556701D03A13F0054E8F8 = {
+			isa = PBXGroup;
+			children = (
+				34B5567B1D03A13F0054E8F8 /* StarvingFish */,
+				34B5567A1D03A13F0054E8F8 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		34B5567A1D03A13F0054E8F8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				34B556791D03A13F0054E8F8 /* StarvingFish.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		34B5567B1D03A13F0054E8F8 /* StarvingFish */ = {
+			isa = PBXGroup;
+			children = (
+				34B5567F1D03A13F0054E8F8 /* AppDelegate.h */,
+				34B556801D03A13F0054E8F8 /* AppDelegate.m */,
+				34B556821D03A13F0054E8F8 /* GameScene.h */,
+				34B556831D03A13F0054E8F8 /* GameScene.m */,
+				34B556871D03A13F0054E8F8 /* GameViewController.h */,
+				34B556881D03A13F0054E8F8 /* GameViewController.m */,
+				34B5569A1D03A3230054E8F8 /* GameViewController.xib */,
+				34B5568D1D03A13F0054E8F8 /* Assets.xcassets */,
+				34B556921D03A13F0054E8F8 /* Info.plist */,
+				34B5567C1D03A13F0054E8F8 /* Supporting Files */,
+				34B556981D03A2D40054E8F8 /* LaunchScreen.xib */,
+			);
+			path = StarvingFish;
+			sourceTree = "<group>";
+		};
+		34B5567C1D03A13F0054E8F8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				34B5567D1D03A13F0054E8F8 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		34B556781D03A13F0054E8F8 /* StarvingFish */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 34B556951D03A13F0054E8F8 /* Build configuration list for PBXNativeTarget "StarvingFish" */;
+			buildPhases = (
+				34B556751D03A13F0054E8F8 /* Sources */,
+				34B556761D03A13F0054E8F8 /* Frameworks */,
+				34B556771D03A13F0054E8F8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = StarvingFish;
+			productName = StarvingFish;
+			productReference = 34B556791D03A13F0054E8F8 /* StarvingFish.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		34B556711D03A13F0054E8F8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = Paker;
+				TargetAttributes = {
+					34B556781D03A13F0054E8F8 = {
+						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 32973VC289;
+					};
+				};
+			};
+			buildConfigurationList = 34B556741D03A13F0054E8F8 /* Build configuration list for PBXProject "StarvingFish" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 34B556701D03A13F0054E8F8;
+			productRefGroup = 34B5567A1D03A13F0054E8F8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				34B556781D03A13F0054E8F8 /* StarvingFish */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		34B556771D03A13F0054E8F8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				34B5569B1D03A3230054E8F8 /* GameViewController.xib in Resources */,
+				34B556991D03A2D40054E8F8 /* LaunchScreen.xib in Resources */,
+				34B5568E1D03A13F0054E8F8 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		34B556751D03A13F0054E8F8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				34B556891D03A13F0054E8F8 /* GameViewController.m in Sources */,
+				34B556811D03A13F0054E8F8 /* AppDelegate.m in Sources */,
+				34B556841D03A13F0054E8F8 /* GameScene.m in Sources */,
+				34B5567E1D03A13F0054E8F8 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		34B556931D03A13F0054E8F8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		34B556941D03A13F0054E8F8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		34B556961D03A13F0054E8F8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = StarvingFish/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = br.newm.paker.StarvingFish;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		34B556971D03A13F0054E8F8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = StarvingFish/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = br.newm.paker.StarvingFish;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		34B556741D03A13F0054E8F8 /* Build configuration list for PBXProject "StarvingFish" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				34B556931D03A13F0054E8F8 /* Debug */,
+				34B556941D03A13F0054E8F8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		34B556951D03A13F0054E8F8 /* Build configuration list for PBXNativeTarget "StarvingFish" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				34B556961D03A13F0054E8F8 /* Debug */,
+				34B556971D03A13F0054E8F8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 34B556711D03A13F0054E8F8 /* Project object */;
+}
