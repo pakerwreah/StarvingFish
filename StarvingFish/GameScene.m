@@ -120,7 +120,7 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
     scoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
     scoreLabel.fontSize = 16;
     scoreLabel.fontColor = [UIColor blackColor];
-    scoreLabel.position = CGPointMake(10,10);
+    scoreLabel.position = CGPointMake(20,20);
     scoreLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
     [self updateScore];
     

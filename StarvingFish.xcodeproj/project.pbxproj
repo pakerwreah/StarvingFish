@@ -124,6 +124,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -257,7 +258,7 @@
 				INFOPLIST_FILE = StarvingFish/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = br.newm.paker.StarvingFish;
+				PRODUCT_BUNDLE_IDENTIFIER = br.paker.StarvingFish;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -270,7 +271,7 @@
 				INFOPLIST_FILE = StarvingFish/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = br.newm.paker.StarvingFish;
+				PRODUCT_BUNDLE_IDENTIFIER = br.paker.StarvingFish;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
