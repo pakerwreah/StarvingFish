@@ -19,6 +19,10 @@ extension UInt32 {
     static func bitMask(_ category: CollisionCategory) -> UInt32 { 1 << category.rawValue }
 }
 
+enum FontName {
+    static let main = "Chalkduster"
+}
+
 class GameScene: SKScene, SKPhysicsContactDelegate {
 
     let motionManager = CMMotionManager()
@@ -29,17 +33,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let scoreLabel: SKLabelNode
     let gameOverTitle: SKLabelNode
     let gameOverBody: SKLabelNode
+    let gameOverNode: SKNode
 
     var bubbles: [SKSpriteNode] = []
     var score = 0
     var bubbleAddedTime: TimeInterval = 0
-    var gamePaused = false
+    var gameOver = false
     var canRestart = false
     var horizontalAngle: CGFloat = 0
 
     override init(size: CGSize) {
 
-        scoreLabel = .init(fontNamed: "Chalkduster")
+        scoreLabel = .init(fontNamed: FontName.main)
         scoreLabel.fontSize = 16
         scoreLabel.fontColor = .black
         scoreLabel.position = .init(x: 20, y: 20)
@@ -56,29 +61,32 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         food.strokeColor = .black
         food.fillColor = .brown
 
-        gameOverTitle = SKLabelNode(fontNamed: "Chalkduster")
+        gameOverTitle = SKLabelNode(fontNamed: FontName.main)
         gameOverTitle.text = "You hit a bubble! ☹️"
         gameOverTitle.fontSize = 22
         gameOverTitle.fontColor = .red
-        gameOverTitle.position = .init(x: size.width / 2, y: size.height / 2 + 30)
-        gameOverTitle.zPosition = 1000
+        gameOverTitle.position.y += 16
         gameOverTitle.isHidden = true
 
-        gameOverBody = SKLabelNode(fontNamed: "Chalkduster")
+        gameOverBody = SKLabelNode(fontNamed: FontName.main)
         gameOverBody.text = "Tap to try again"
         gameOverBody.fontSize = 14
         gameOverBody.fontColor = .red
-        gameOverBody.position = .init(x: size.width / 2, y: size.height / 2)
-        gameOverBody.zPosition = 1000
+        gameOverBody.position.y -= 16
         gameOverBody.isHidden = true
+
+        gameOverNode = SKNode()
+        gameOverNode.position = .init(x: size.width / 2, y: size.height / 2)
+        gameOverNode.zPosition = 1000
+        gameOverNode.addChild(gameOverTitle)
+        gameOverNode.addChild(gameOverBody)
 
         super.init(size: size)
 
         addChild(scoreLabel)
         addChild(fish)
         addChild(food)
-        addChild(gameOverTitle)
-        addChild(gameOverBody)
+        addChild(gameOverNode)
 
         scaleMode = .aspectFit
 
@@ -86,18 +94,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         physicsWorld.contactDelegate = self
 
-        motionManager.deviceMotionUpdateInterval = 0.1
-
-        motionManager.startDeviceMotionUpdates(using: .xArbitraryCorrectedZVertical, to: queue) { [weak self] motion, error in
+        motionManager.startDeviceMotionUpdates(using: .xArbitraryCorrectedZVertical, to: .main) { [weak self] motion, error in
             if let error {
                 return print(error.localizedDescription)
             }
 
             guard let self, let motion else { return }
 
-            DispatchQueue.main.async {
-                self.processGravity(x: motion.gravity.x, y: motion.gravity.y)
-            }
+            self.processGravity(motion.gravity)
         }
 
         #if targetEnvironment(simulator)
@@ -112,21 +116,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func simulateGravity() {
         Timer.scheduledTimer(withTimeInterval: motionManager.deviceMotionUpdateInterval, repeats: true) { [weak self] _ in
             let amount = 1.0
-            var x = 0.0
-            var y = 0.0
+            var gravity = CMAcceleration()
 
             switch (UIDevice.current.orientation) {
             case .landscapeRight:
-                x = amount
+                gravity.x = amount
             case .portraitUpsideDown:
-                y = amount
+                gravity.y = amount
             case .landscapeLeft:
-                x = -amount
+                gravity.x = -amount
             default:
-                y = -amount
+                gravity.y = -amount
             }
 
-            self?.processGravity(x: x, y: y)
+            self?.processGravity(gravity)
         }
     }
 
@@ -164,6 +167,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         fish.physicsBody = .init(texture: fish.texture!, size: fish.texture!.size())
         fish.physicsBody!.allowsRotation = false
         fish.physicsBody!.affectedByGravity = false
+        fish.physicsBody!.linearDamping = 1
         fish.physicsBody!.categoryBitMask = .bitMask(.fish)
         fish.physicsBody!.contactTestBitMask = .bitMask(.food) | .bitMask(.bubble)
         fish.yScale = 0.1
@@ -175,16 +179,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         placeFood()
         updateScore()
 
-        gamePaused = false
+        gameOver = false
     }
 
-    func processGravity(x: Double, y: Double) {
+    func processGravity(_ gravity: CMAcceleration) {
 
-        physicsWorld.gravity = .init(dx: -x / 2, dy: -y / 2)
+        horizontalAngle = atan2(gravity.y, gravity.x) + .pi / 2
 
-        guard !fish.hasActions() && !gamePaused else { return }
+        let gravityMultiplier: CGFloat = 5
 
-        horizontalAngle = atan2(y, x) + .pi / 2
+        physicsWorld.gravity = .init(
+            dx: -gravity.x * gravityMultiplier,
+            dy: -gravity.y * gravityMultiplier
+        )
+
+        guard !fish.hasActions() && !gameOver else { return }
 
         fish.run(.rotate(toAngle: horizontalAngle, duration: 0.5, shortestUnitArc: true))
     }
@@ -192,17 +201,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func createBubble() {
         let bubble = SKSpriteNode(imageNamed: "bubble")
         let scale: CGFloat = 0.2 + CGFloat(arc4random() % 4) / 10.0
-        bubble.xScale = scale
+        bubble.xScale = -scale
         bubble.yScale = scale
         let radius = bubble.size.width / 2
         var location = randomPoint()
 
-        location.x -= physicsWorld.gravity.dx * size.width * 2
-        location.y -= physicsWorld.gravity.dy * size.height * 2
+        location.x += sin(horizontalAngle) * (size.width + radius)
+        location.y -= cos(horizontalAngle) * (size.height + radius)
 
         bubble.physicsBody = .init(circleOfRadius: radius)
         bubble.physicsBody!.allowsRotation = false
-        bubble.physicsBody!.density = scale
+        bubble.physicsBody!.mass = scale
+        bubble.physicsBody!.linearDamping = 1 / scale
         bubble.physicsBody!.affectedByGravity = true
         bubble.physicsBody!.categoryBitMask = .bitMask(.bubble)
         bubble.position = location
@@ -222,8 +232,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     func showGameOver() {
         gameOverTitle.isHidden = false
+        gameOverNode.zRotation = horizontalAngle
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             self.gameOverBody.isHidden = false
             self.canRestart = true
         }
@@ -248,12 +259,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         guard frame.size != .zero else { return }
 
-        if currentTime - bubbleAddedTime > 2 && !gamePaused {
+        gameOverNode.zRotation = horizontalAngle
+
+        if currentTime - bubbleAddedTime > 1 && !gameOver {
             bubbleAddedTime = currentTime
             createBubble()
         }
 
-        let maxSpeed: CGFloat = gamePaused ? 0 : 150
+        let maxSpeed: CGFloat = gameOver ? 0 : 200
         for bubble in bubbles {
             let body = bubble.physicsBody!
             let v = body.velocity
@@ -261,6 +274,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 dx: v.dx > 0 ? min(v.dx, maxSpeed) : max(v.dx, -maxSpeed),
                 dy: v.dy > 0 ? min(v.dy, maxSpeed) : max(v.dy, -maxSpeed)
             )
+            bubble.zRotation = horizontalAngle
         }
     }
 
@@ -272,7 +286,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             return restart()
         }
 
-        guard !gamePaused, let touch = touches.first else { return }
+        guard !gameOver, let touch = touches.first else { return }
 
         let location = touch.location(in: self)
 
@@ -282,21 +296,51 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 .rotate(toAngle: horizontalAngle, duration: 0.1, shortestUnitArc: true)
         ]))
 
-        var right = fish.xScale < 0
+        let currentOrientation: PointOrientation = fish.xScale < 0 ? .right : .left
+        let relativeOrientation = pointOrientationAfterRotation(
+            center: fish.position,
+            point: location,
+            angleInRadians: -fish.zRotation
+        )
 
-        fish.xScale *= (right && location.x < fish.position.x) || (!right && location.x > fish.position.x) ? -1 : 1
+        switch (currentOrientation, relativeOrientation) {
+        case (.left, .right), (.right, .left):
+                fish.xScale.negate()
+        default:
+            break
+        }
+    }
 
-        right = fish.xScale < 0
+    enum PointOrientation {
+        case right
+        case left
+        case none
+    }
 
-        let dx = right ? (location.x - fish.position.x) : (fish.position.x - location.x)
-        let dy = right ? (location.y - fish.position.y) : (fish.position.y - location.y)
+    func pointOrientationAfterRotation(center: CGPoint, point: CGPoint, angleInRadians: CGFloat) -> PointOrientation {
+        // Step 1: Calculate the center-relative coordinates of the given point
+        let relativeX = point.x - center.x
+        let relativeY = point.y - center.y
 
-        fish.run(.rotate(toAngle: atan2(dy, dx), duration: 0.1, shortestUnitArc: true))
+        // Step 2: Apply the rotation to the point's coordinates
+        let cosAngle = cos(angleInRadians)
+        let sinAngle = sin(angleInRadians)
+        let rotatedX = relativeX * cosAngle - relativeY * sinAngle
+
+        // Step 3: Compare the x-coordinate of the rotated point with the center's x-coordinate
+        if rotatedX > 0 {
+            return .right
+        } else if rotatedX < 0 {
+            return .left
+        } else {
+            // Handle special case when the point lies on the y-axis
+            return .none
+        }
     }
 
     func didBegin(_ contact: SKPhysicsContact) {
 
-        guard !gamePaused, contact.bodyA.node == fish else { return }
+        guard !gameOver, contact.bodyA.node == fish else { return }
 
         switch contact.bodyB.categoryBitMask {
         case .bitMask(.food):
@@ -305,7 +349,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             placeFood()
 
         case .bitMask(.bubble):
-            gamePaused = true
+            gameOver = true
             fish.removeAllActions()
             fish.run(.setTexture(.init(imageNamed: "deadfish")))
             DispatchQueue.main.asyncAfter(deadline: .now() + 15) { [fish] in
